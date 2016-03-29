@@ -5,11 +5,14 @@ var bodyParser = require('body-parser');
 global.q = require('q');
 global.app = express();
 global.keys = require('./keys.js')();
+global.config = require('./config.js')();
+var CB = require('cloudboost');
+app.use(express.static(__dirname + '/public'));
 global.app.use(bodyParser.json());
 global.app.use(cors());
+CB.CloudApp.init(global.keys.appId, global.keys.appKey);
 global.app.listen(process.env.PORT || 8000,function(req,res){
 	require('./api/coupon.js')();
-	global.dbService = require('./services/dbService.js')();
 	global.couponService = require('./services/couponService')();
 	global.mySql = require('./init.js')();
 	global.util = require('./services/util.js')();

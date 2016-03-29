@@ -1,10 +1,7 @@
 module.exports = function(){
     var obj= {
-        host: "localhost",
-        user: "admin",
-        password: "WhiteHouse123",
-        database: "Coupons",
-        port: 3306
+        appId: 'edjcsmyvnrmw',
+        appKey: '16a8405b-5916-43e7-9e9a-a7cc8b7b84fa'
     };
 
     return obj;
