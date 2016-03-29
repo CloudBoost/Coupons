@@ -1,1 +1,1 @@
-# CloudBoost Coupons
+# Coupons
