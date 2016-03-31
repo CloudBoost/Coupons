@@ -48,7 +48,7 @@ module.exports = function(){
 		})
 	})
     
-    global.app.get("/couponlist",function(req,res){
+    global.app.post("/couponlist",function(req,res){
 		global.couponService.list().then(function(result){
 			res.status(200).send(result);
 		},function(err){

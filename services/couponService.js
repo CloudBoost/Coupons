@@ -5,18 +5,12 @@ module.exports = function(){
 		generate: function(code, description, limit, type, amount, validfrom, validuntil){
 			var deferred = global.q.defer();
 			var couponId = global.util.generateCouponId();
-			var data = {};
-			data.type = type;
-			data.description = description;
-			data.validity = validity;
-			data.couponId = couponId;
-			data.value = value;
-            var obj = new CB.CloudObject("Coupon");
+            var obj = new global.CB.CloudObject("Coupon");
             obj.set("code", code);
             obj.set("description", description);
             obj.set("limit", limit);
             if(type === "percentage")
-                obj.set("percentaget", true);
+                obj.set("percentage", true);
             else
                 obj.set("percentage", false);
             obj.set("amount", amount);
@@ -34,13 +28,16 @@ module.exports = function(){
 			return deferred.promise;
 		},
 
-        list: function(page, total){
+        list: function(){
            var deferred = global.q.defer();
-           var query = new CB.CloudQuery("Coupon");
+           var query = new global.CB.CloudQuery("Coupon");
            query.setLimit(99);
            query.find({
                 success: function(object){
-                    deferred.resolve(object.document);
+                    for(var i=0; i<object.length; i++){
+                        object[i].document.ACL = null;
+                    }
+                    deferred.resolve(object);
                 },
                 error: function(err) {
                     deferred.reject(err);
@@ -51,7 +48,7 @@ module.exports = function(){
         
 		apply: function(couponId,amount,redeem){
 			var deferred = global.q.defer();
-            var query = new CB.CloudQuery("Coupon");
+            var query = new global.CB.CloudQuery("Coupon");
             query.equalTo("code", couponId);
             query.find({
                 success: function(result){
@@ -66,11 +63,12 @@ module.exports = function(){
                         
                         if(redeem){
                             var _obj = {};
+                            result[0].document.ACL = null;
                             _obj.record = result[0].document;
-                            _obj.discount = discount;
+                            _obj.discount = discount.toString();
                             deferred.resolve(_obj);
                         }else{
-                            deferred.resolve(discount);
+                            deferred.resolve(discount.toString());
                         }	
                     }
                 },
@@ -84,7 +82,7 @@ module.exports = function(){
 		redeem: function(couponId,amount){
 			var deferred = global.q.defer();
 			obj.apply(couponId,amount, true).then(function(res){
-                var object = new CB.CloudObject("Coupon", res.record._id);
+                var object = new global.CB.CloudObject("Coupon", res.record._id);
                 if(res.record.redemCount)
                     object.set("redemCount", res.record.redemCount + 1);
                 else
@@ -93,7 +91,7 @@ module.exports = function(){
                     success: function(){
                         deferred.resolve(res.discount);
                     },
-                    error: function(){
+                    error: function(err){
                         deferred.reject(err);
                     }
                 });
@@ -105,12 +103,12 @@ module.exports = function(){
         
         delete: function(couponId){
             var deferred = global.q.defer();
-            var query = new CB.CloudQuery("Coupon");
+            var query = new global.CB.CloudQuery("Coupon");
             query.equalTo("code", couponId);
             query.find({
                 success: function(res){
                     if(res.length > 0){
-                        var obj = new CB.CloudObject("Coupon", res[0].document._id);
+                        var obj = new global.CB.CloudObject("Coupon", res[0].document._id);
                         obj.delete({
                             success: function(data){
                                 deferred.resolve("deleted");
