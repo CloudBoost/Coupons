@@ -6,7 +6,7 @@ global.q = require('q');
 global.app = express();
 global.keys = require('./keys.js')();
 global.config = require('./config.js')();
-app.use(express.static(__dirname + '/public'));
+global.app.use("/", express.static(__dirname + '/public'));
 global.app.use(bodyParser.json());
 global.app.use(cors());
 global.CB = require('cloudboost');

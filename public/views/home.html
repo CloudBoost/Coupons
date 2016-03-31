@@ -1,0 +1,50 @@
+<div class="container main">
+    <div class="row header">
+        <div class="col-sm-8 title">
+            <h2>Coupons</h2>
+        </div>
+        <div class="col-sm-4 action">
+            <button class="btn btn-lg btn-success" ng-click="newCoupon()">Create a Coupon</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row body">
+        <div class="row-md-8">
+            <table class="table  table-hover data-table">
+                <thead>
+                    <tr>
+                        <th>   
+                            Code
+                        </th>
+                        <th >
+                            Discount
+                        </th>
+                        <th >
+                            Description
+                        </th>
+                        <th>
+                            Redeemed
+                        </th>
+                        <th>
+                            Expiration
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="coupon in list">
+                        <td>{{coupon.document.code}}</td>
+                        <td><span ng-if="!coupon.document.percentage">$&nbsp;</span>{{coupon.document.amount}} <span ng-if="coupon.document.percentage">%</span>&nbsp;OFF</td>
+                        <td>{{coupon.document.description}}</td>
+                        <td>{{coupon.document.redemCount || 0 }}</td>
+                        <td>{{coupon.document.validUntil | date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    <div class="row footer">
+        <div class="action">
+        </div>
+    </div>
+</div>

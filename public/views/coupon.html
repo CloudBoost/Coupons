@@ -1,0 +1,74 @@
+<div class="container main">
+    <div class="row header">
+        <div class="col-sm-8 title">
+            <h2>New Coupons</h2>
+        </div>
+        <div class="col-sm-4 action">
+            <button class="btn btn-lg btn-success" ng-click="dashboard()">Dashboard</button>
+        </div>
+    </div>
+    <hr>
+    <div class="body">
+        <form ng-submit="addNew()" name="couponForm">
+            <div class="form-group">
+                <label for="discountCoupon">Discount Coupon</label>
+                <input type="text" class="form-control" ng-model="code" id="discountCoupon" placeholder="Discount Coupon" name="code" ng-required="true">
+                <div class="help-block text-danger" ng-messages="couponForm.code.$error">
+                    <div ng-message="required">This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" ng-model="description" id="description" name="description" placeholder="Description" ng-required="true">
+                <div class="help-block text-danger" ng-messages="couponForm.description.$error">
+                    <div ng-message="required">This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Redemption Limit</label>
+                <input type="number" class="form-control" ng-model="limit" id="redemptionLimit" name="limit" placeholder="Limit" ng-required="true">
+                <div class="help-block text-danger" ng-messages="couponForm.limit.$error">
+                    <div ng-message="required">This field is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type">type</label>
+                <select class="form-control" ng-model="type" ng-required="true">
+                    <option value="percentage">percentage</option>
+                    <option value="cash">cash</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" class="form-control" ng-model="amount" id="amount" placeholder="amount" name="amount" ng-required="true">
+                <div class="help-block text-danger" ng-messages="couponForm.amount.$error">
+                    <div ng-message="required">This field is required</div>
+                </div>
+            </div>
+                       
+            <div class="form-group">
+                <label for="amount">Valid From</label>
+                <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="validfrom" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Valid Until</label>
+                <p class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}"  ng-model="validuntil" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+                </p>
+            </div>
+            <button type="submit" class="btn btn-success" ng-disabled="couponForm.$invalid ">Create</button>
+        </form>
+    </div>
+    <div class="footer">
+        
+    </div>
+</div>
