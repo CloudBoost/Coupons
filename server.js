@@ -11,7 +11,7 @@ global.app.use(bodyParser.json());
 global.app.use(cors());
 global.CB = require('cloudboost');
 global.CB.CloudApp.init(global.keys.appId, global.keys.appKey);
-global.app.listen(process.env.PORT || 8000,function(req,res){
+global.app.listen(process.env.PORT || 8000,function(){
 	require('./api/coupon.js')();
 	global.couponService = require('./services/couponService')();
 	global.util = require('./services/util.js')();
