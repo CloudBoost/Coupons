@@ -15,8 +15,8 @@ $ npm install
 ```
 This coupon uses cloudboost database service.
 - Go to [cloudboost.io](htttps://dashboard.cloudboost.io)'s dashboard and create an app.
+- Click on 'App Keys' Button
 
-Click on 'App Keys' Button
 ![AppId and AppKey](https://github.com/CloudBoost/Coupons/blob/master/screenshot/app.png)
 
 - Go to 'Manage App'.
