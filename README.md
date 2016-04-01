@@ -50,16 +50,16 @@ $http.get("/generate/code"); //returns a string
 
 Apply a Coupon
 ```javascript
-$http.post("/apply", {"couponId:'ABCD234', amount:1200"}); //retruns total discount on 1500 for given coupon code.
+$http.post("/apply", {"couponId":'ABCD234', "amount":1200}); //retruns total discount on 1500 for given coupon code.
 ```
 
 Redeem a Coupon
 ```javascript
-$http.post("/redeem", {"couponId:'ABCD234', amount:1200"}); //retruns total discount on 1500 for given coupon code and also increase value of redeem count.
+$http.post("/redeem", {"couponId":'ABCD234', "amount":1200}); //retruns total discount on 1500 for given coupon code and also increase value of redeem count.
 ```
 Delete a Coupon
 ```javascript
-$http.post("/delete", {"couponId:'ABCD234'});
+$http.post("/delete", {"couponId":'ABCD234'});
 ```
 Get List of Coupon
 ```javascript
