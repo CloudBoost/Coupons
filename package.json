@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
-    "cloudboost": "^1.1.320",
+    "cloudboost": "^1.1.345",
     "component-emitter": "^1.2.0",
     "cors": "^2.7.1",
     "engine.io-client": "^1.6.8",
